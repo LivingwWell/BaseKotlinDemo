@@ -10,6 +10,7 @@ import android.view.Gravity
 import androidx.appcompat.widget.AppCompatTextView
 import com.example.app.R
 import com.example.core.utils.Utils
+import com.example.core.utils.Utils.Companion.dp2px
 import kotlin.random.Random
 
 /**
@@ -18,27 +19,15 @@ import kotlin.random.Random
  * @Author:          lee
  * @CreateDate:     2020/9/7 3:08 PM
  */
-class CodeView : AppCompatTextView {
 
-    constructor(context: Context):this(context,null)
+class CodeView @JvmOverloads constructor(context: Context, attrs: AttributeSet?=null): AppCompatTextView(context, attrs){
 
-
-
-    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
-        setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f)
-        gravity = Gravity.CENTER
-        setBackgroundColor(getContext().getColor(R.color.colorPrimary))
-        setTextColor(Color.WHITE)
-
-        paint.isAntiAlias = true
-        paint.style = Paint.Style.STROKE
-        paint.color = getContext().getColor(R.color.colorAccent)
-        paint.strokeWidth = Utils.dp2px(6f)
-
-        updateCode()
+    private val paint = Paint().apply {
+        isAntiAlias = true
+        style = Paint.Style.STROKE
+        color = getContext().getColor(R.color.colorAccent)
+        strokeWidth = 6f.dp2px()
     }
-
-    private val paint = Paint()
     private val codeList = arrayOf(
             "kotlin",
             "android",
@@ -49,6 +38,16 @@ class CodeView : AppCompatTextView {
             "retrofit",
             "tcp/ip"
     )
+
+   init{
+        setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f)
+        gravity = Gravity.CENTER
+        setBackgroundColor(getContext().getColor(R.color.colorPrimary))
+        setTextColor(Color.WHITE)
+        updateCode()
+    }
+
+
 
     fun updateCode() {
         val random = Random.nextInt(codeList.size)

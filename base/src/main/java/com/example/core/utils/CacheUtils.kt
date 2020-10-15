@@ -14,17 +14,13 @@ import com.example.core.R
 class CacheUtils {
     @SuppressLint("StaticFieldLeak")
     companion object{
-        private val context = currentApplication()
+        private val context = currentApplication
 
         private val SP = context.getSharedPreferences(context.getString(R.string.app_name), Context.MODE_PRIVATE)
 
-        fun save(key: String?, value: String?) {
-            SP.edit().putString(key, value).apply()
-        }
+        fun save(key: String?, value: String?) =  SP.edit().putString(key, value).apply()
 
-        operator fun get(key: String?): String? {
-            return SP.getString(key, null)
-        }
+        operator fun get(key: String?): String?=SP.getString(key, null)
     }
 
 }

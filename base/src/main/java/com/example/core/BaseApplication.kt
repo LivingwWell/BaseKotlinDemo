@@ -13,11 +13,7 @@ class BaseApplication : Application() {
 
     companion object {
         lateinit var currentApplication: Context
-
-        @JvmStatic
-        fun currentApplication(): Context {
-            return currentApplication
-        }
+        private set
     }
 
 
